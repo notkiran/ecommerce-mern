@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -38,6 +40,21 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+  const location = useLocation();
+  const category = location.pathname.split("/")[2];
+
+  const [filter, setFilter] = useState({});
+  const [sort, setSort] = useState("newest");
+  const handleFilter = (e) => {
+    const value = e.target.value;
+    setFilter({
+      ...filter,
+      [e.target.name]: value,
+    });
+  };
+
+  console.log(filter);
+
   return (
     <Container>
       <Navbar />
@@ -46,10 +63,8 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select>
-            <Option disabled selected>
-              All
-            </Option>
+          <Select name="color" onChange={handleFilter}>
+            <Option disabled>All</Option>
             <Option>New</Option>
             <Option>Sale</Option>
             <Option>White</Option>
@@ -57,10 +72,8 @@ const ProductList = () => {
             <Option>Red</Option>
             <Option>Blue</Option>
           </Select>
-          <Select>
-            <Option disabled selected>
-              Size
-            </Option>
+          <Select name="size" onChange={handleFilter}>
+            <Option disabled>Size</Option>
             <Option>XS</Option>
             <Option>S</Option>
             <Option>M</Option>
@@ -70,8 +83,8 @@ const ProductList = () => {
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>
-          <Select>
-            <Option selected>Newest</Option>
+          <Select onChange={(e) => setSort(e.target.value)}>
+            <Option selected >Newest</Option>
             <Option>Price: Low to High</Option>
             <Option>Price: High to Low</Option>
             <Option>Popularity</Option>
