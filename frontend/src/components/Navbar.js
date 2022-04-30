@@ -89,12 +89,27 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>ECOM.</Logo>
+          <Link to={"/"} style={{ textDecoration: "none", color: "inherit" }}>
+            <Logo>ECOM.</Logo>
+          </Link>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-          <Link to={"/cart"}>
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <MenuItem>REGISTER</MenuItem>
+          </Link>
+          <Link
+            to="/login"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <MenuItem>SIGN IN</MenuItem>
+          </Link>
+          <Link
+            to={"/cart"}
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
             <MenuItem>
               <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlinedIcon />

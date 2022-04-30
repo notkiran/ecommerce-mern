@@ -1,3 +1,5 @@
+import { ArrowBack } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 
@@ -24,6 +26,8 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
+  display: flex;
+  align-items: center;
   font-size: 24px;
   font-weight: 300;
 `;
@@ -46,7 +50,7 @@ const Agreement = styled.span`
   margin: 20px 0px;
 `;
 
-const Link = styled.a`
+const LinkText = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -66,7 +70,12 @@ const Register = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>CREATE AN ACCOUNT</Title>
+        <Title>
+          <Link to={"/"} style={{ display: "flex", color: "inherit" }}>
+            <ArrowBack style={{ marginRight: "5px" }} />
+          </Link>
+          CREATE AN ACCOUNT
+        </Title>
         <Form>
           <Input placeholder="First Name" />
           <Input placeholder="Last Name" />
@@ -77,7 +86,7 @@ const Register = () => {
           <Agreement>
             By creating an account, you agree to our-
             <b>
-              <Link>Terms & Privacy.</Link>
+              <LinkText>Terms & Privacy.</LinkText>
             </b>
           </Agreement>
           {"\n"} <Button> CREATE</Button>

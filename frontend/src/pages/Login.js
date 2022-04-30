@@ -3,6 +3,8 @@ import { mobile } from "../responsive";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./../redux/apiCalls";
+import { ArrowBack } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -27,6 +29,8 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
+  display: flex;
+  align-items: center;
   font-size: 24px;
   font-weight: 300;
 `;
@@ -57,7 +61,7 @@ const Button = styled.button`
   }
 `;
 
-const Link = styled.a`
+const LinkText = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -82,7 +86,12 @@ const Login = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>SIGN IN</Title>
+        <Title>
+          <Link to={"/"} style={{ display: "flex", color: "inherit" }}>
+            <ArrowBack style={{ marginRight: "5px" }} />
+          </Link>
+          SIGN IN
+        </Title>
         <Form>
           <Input
             placeholder="Username"
@@ -99,8 +108,8 @@ const Login = () => {
             LOGIN
           </Button>
           {error && <Error>Something went wrong!</Error>}
-          <Link>FORGOT PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <LinkText>FORGOT PASSWORD?</LinkText>
+          <LinkText>CREATE A NEW ACCOUNT</LinkText>
         </Form>
       </Wrapper>
     </Container>
