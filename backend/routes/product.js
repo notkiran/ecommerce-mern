@@ -53,7 +53,6 @@ router.get("/find/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   const qNew = req.query.new;
   const qCategory = req.query.category;
-  console.log(qCategory);
 
   try {
     let products;
@@ -66,7 +65,6 @@ router.get("/", async (req, res) => {
           $in: [qCategory],
         },
       });
-      console.log(products);
     } else {
       products = await Product.find();
     }

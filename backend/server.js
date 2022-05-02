@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const PORT = process.env.PORT || 5000;
 dotenv.config();
+const path = require("path");
 
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
@@ -17,7 +19,7 @@ mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => {
-    console.log({ error: err });
+    console.log(err);
   });
 
 app.use(cors());
@@ -30,6 +32,21 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
 
-app.listen(process.env.PORT || 5000, () =>
-  console.log("Server started on port 5000")
-);
+// ----------------------------------------  deployent -------------------------------------------------
+
+__dirname = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+
+// ----------------------------------------  deployent -------------------------------------------------
+
+app.listen(PORT, () => console.log("Server started on port 5000"));
