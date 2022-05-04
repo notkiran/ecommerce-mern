@@ -36,14 +36,13 @@ app.use("/api/checkout", stripeRoute);
 
 __dirname = path.resolve();
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/frontend/build")));
-
-  app.use("/admin", express.static(__dirname + "/admin/build"));
-  app.get("/admin", (req, res) =>
+  app.use("/admin/", express.static(path.join(__dirname, "/admin/build")));
+  app.get("/admin/*", (req, res) =>
     res.sendFile(path.resolve(__dirname, "admin", "build", "index.html"))
   );
 
-  app.get("*", (req, res) =>
+  app.use("/", express.static(path.join(__dirname, "/frontend/build")));
+  app.get("/*", (req, res) =>
     res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"))
   );
 } else {
