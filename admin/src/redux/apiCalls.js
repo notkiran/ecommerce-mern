@@ -13,7 +13,14 @@ import {
   updateProductStart,
   updateProductSuccess,
 } from "./productRedux";
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
+import {
+  loginFailure,
+  loginStart,
+  loginSuccess,
+  logoutFailure,
+  logoutStart,
+  logoutSuccess,
+} from "./userRedux";
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -22,6 +29,15 @@ export const login = async (dispatch, user) => {
     dispatch(loginSuccess(res.data));
   } catch (error) {
     dispatch(loginFailure());
+  }
+};
+
+export const logout = async (dispatch) => {
+  dispatch(logoutStart());
+  try {
+    dispatch(logoutSuccess());
+  } catch (error) {
+    dispatch(logoutFailure());
   }
 };
 

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { userRequest } from "../requestMethods";
 
 const Success = () => {
   const location = useLocation();
+
   //in Cart.jsx I sent data and cart. Please check that page for the changes.(in video it's only data)
   const data = true;
   const cart = location.state.cart;
@@ -42,7 +43,11 @@ const Success = () => {
       {orderId
         ? `Order has been created successfully. Your order number is ${orderId}`
         : `Successfull. Your order is being prepared...`}
-      <button style={{ padding: 10, marginTop: 20 }}>Go to Homepage</button>
+      <Link to={"/"}>
+        <button style={{ padding: 10, marginTop: 20, cursor: "pointer" }}>
+          Go to Homepage
+        </button>
+      </Link>
     </div>
   );
 };
